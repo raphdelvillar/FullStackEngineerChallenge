@@ -23,4 +23,13 @@ body {
     background: white;
     padding: 24px;
     height: 75vh;
+    box-shadow: 0 0.5px #FFFFFF inset, 0 0.5px 1.5px rgba(34, 25, 25, 0.4);
+}
+
+.table-operations {
+    margin-bottom: 16px;
+}
+  
+.table-operations > button {
+    margin-right: 8px;
 }

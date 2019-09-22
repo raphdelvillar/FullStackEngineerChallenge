@@ -1,5 +1,9 @@
 import React from "react";
 
+import Action from "./list/action";
+import Search from "./list/search";
+import Table from "./list/list";
+
 export default class Employees extends React.Component {
     constructor(props) {
         super(props);
@@ -7,7 +11,11 @@ export default class Employees extends React.Component {
 
     render() {
         return (
-            <div></div>
+            <div>
+                <Action />
+                <Search />
+                <Table />
+            </div>
         )
     }
 }

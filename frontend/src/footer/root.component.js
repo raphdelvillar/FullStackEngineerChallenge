@@ -15,9 +15,8 @@ export default class FooterComponent extends React.Component {
         return (
             <Footer>
                 <center>
-                PayPay ©2019 Created with
-                &nbsp;<Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" /> 
-                &nbsp;by {this.state.author}
+                PayPay - FullStackEngineerChallenge ©2019 Created
+                by {this.state.author}
                 </center>
             </Footer>
         )
