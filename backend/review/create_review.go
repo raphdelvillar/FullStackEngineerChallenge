@@ -36,8 +36,17 @@ func (cr *CreateReview) Execute(c echo.Context) *command.Response {
 		}
 	}
 
+	review, err := Db.CreateReview(cr.Request.Review)
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  review,
 	}
 }

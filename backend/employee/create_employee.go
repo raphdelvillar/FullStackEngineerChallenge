@@ -36,8 +36,17 @@ func (ce *CreateEmployee) Execute(c echo.Context) *command.Response {
 		}
 	}
 
+	employee, err := Db.CreateEmployee(ce.Request.Employee)
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  employee,
 	}
 }

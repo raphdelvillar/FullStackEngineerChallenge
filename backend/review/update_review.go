@@ -29,7 +29,7 @@ func (ur *UpdateReview) Init() *command.Config {
 
 // Execute --
 func (ur *UpdateReview) Execute(c echo.Context) *command.Response {
-	// id := c.Param("id")
+	id := c.Param("id")
 
 	if err := c.Bind(&ur.Request); err != nil {
 		return &command.Response{
@@ -38,8 +38,17 @@ func (ur *UpdateReview) Execute(c echo.Context) *command.Response {
 		}
 	}
 
+	review, err := Db.UpdateReview(id, ur.Request.Review)
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  review,
 	}
 }

@@ -29,7 +29,7 @@ func (ue *UpdateEmployee) Init() *command.Config {
 
 // Execute --
 func (ue *UpdateEmployee) Execute(c echo.Context) *command.Response {
-	// id := c.Param("id")
+	id := c.Param("id")
 
 	if err := c.Bind(&ue.Request); err != nil {
 		return &command.Response{
@@ -38,8 +38,17 @@ func (ue *UpdateEmployee) Execute(c echo.Context) *command.Response {
 		}
 	}
 
+	employee, err := Db.UpdateEmployee(id, ue.Request.Employee)
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  employee,
 	}
 }

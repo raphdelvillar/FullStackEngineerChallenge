@@ -82,3 +82,42 @@ func (s *mysqlStorage) FindReview(id string) (domain.Review, error) {
 
 	return review, nil
 }
+
+func (s *mysqlStorage) CreateReview(review domain.Review) (domain.Review, error) {
+	s.Init()
+	insertQuery, err := s.Db.Prepare(fmt.Sprintf("INSERT INTO %s(employee_id, rating, comment) VALUES (?, ?, ?)", reviewTable))
+
+	if err != nil {
+		return domain.Review{}, err
+	}
+
+	insertQuery.Exec(review.EmployeeID, review.Rating, review.Comment)
+
+	return review, nil
+}
+
+func (s *mysqlStorage) UpdateReview(id string, review domain.Review) (domain.Review, error) {
+	s.Init()
+	updateQuery, err := s.Db.Prepare(fmt.Sprintf("UPDATE %s SET employee_id = ?, rating = ?, comment = ?", reviewTable))
+
+	if err != nil {
+		return domain.Review{}, err
+	}
+
+	updateQuery.Exec(review.EmployeeID, review.Rating, review.Comment)
+
+	return review, nil
+}
+
+func (s *mysqlStorage) DeleteReview(id string) error {
+	s.Init()
+	deleteQuery, err := s.Db.Prepare(fmt.Sprintf("DELETE FROM %s WHERE id=?", reviewTable))
+
+	if err != nil {
+		return err
+	}
+
+	deleteQuery.Exec(id)
+
+	return nil
+}

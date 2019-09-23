@@ -3,7 +3,7 @@ package domain
 // Review --
 type Review struct {
 	ID         int
-	reviewID int
+	EmployeeID int
 	Rating     float32
 	Comment    string
 }

@@ -82,3 +82,42 @@ func (s *mysqlStorage) FindEmployee(id string) (domain.Employee, error) {
 
 	return employee, nil
 }
+
+func (s *mysqlStorage) CreateEmployee(employee domain.Employee) (domain.Employee, error) {
+	s.Init()
+	insertQuery, err := s.Db.Prepare(fmt.Sprintf("INSERT INTO %s(full_name, designation, gender, join_date) VALUES (?, ?, ?, ?)", employeeTable))
+
+	if err != nil {
+		return domain.Employee{}, err
+	}
+
+	insertQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate)
+
+	return employee, nil
+}
+
+func (s *mysqlStorage) UpdateEmployee(id string, employee domain.Employee) (domain.Employee, error) {
+	s.Init()
+	updateQuery, err := s.Db.Prepare(fmt.Sprintf("UPDATE %s SET full_name = ?, designation = ?, gender = ?, join_date = ?", employeeTable))
+
+	if err != nil {
+		return domain.Employee{}, err
+	}
+
+	updateQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate)
+
+	return employee, nil
+}
+
+func (s *mysqlStorage) DeleteEmployee(id string) error {
+	s.Init()
+	deleteQuery, err := s.Db.Prepare(fmt.Sprintf("DELETE FROM %s WHERE id=?", employeeTable))
+
+	if err != nil {
+		return err
+	}
+
+	deleteQuery.Exec(id)
+
+	return nil
+}
