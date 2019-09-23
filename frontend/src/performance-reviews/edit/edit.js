@@ -10,7 +10,7 @@ import {
 
 import api from "../../data";
 
-class New extends React.Component {
+class Edit extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -19,9 +19,9 @@ class New extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                api.Employee().Post(values, response => {
+                api.Review().Patch("", values, response => {
                     console.log(response);
-                })
+                })           
             }
         })
     }
@@ -91,7 +91,7 @@ class New extends React.Component {
                         rules: [
                             {
                                 required: true,
-                                message: "Join Datei is required",
+                                message: "Join Date is required",
                             },
                         ],
                     })(<DatePicker style={{ marginTop: 5 }} />)}
@@ -106,4 +106,4 @@ class New extends React.Component {
     }
 }
 
-export default Form.create({ name: "new employee" })(New);
+export default Form.create({ name: "edit employee" })(Edit);

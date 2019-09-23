@@ -8,15 +8,9 @@ class Action extends React.Component {
         super(props);
     }
 
-    newEmployee = () => {
-        this.props.history.push("/new");
-    }
-
     render() {
         return (
             <div className="table-operations">
-                <Button type="primary" onClick={() => this.newEmployee()}>New Employee</Button>
-                <Button>Clear filters</Button>
             </div>
         )
     }

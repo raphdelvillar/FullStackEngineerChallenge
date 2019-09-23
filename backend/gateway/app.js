@@ -1,5 +1,13 @@
 const gateway = require("fast-gateway")
-const port = process.env.PORT || 8000
+const fs = require("fs");
+const toml = require("toml")
+
+const config = toml.parse(fs.readFileSync("./config.toml", "utf-8"))
+global.config = config
+
+const port = global.config.http.port
+const serviceName = global.config.service.name
+const host = global.config.http.host
 
 gateway({
     middlewares: [
@@ -9,11 +17,11 @@ gateway({
 
     routes: [{
         prefix: "/employees",
-        target: "http://localhost:8002/employees"
+        target: `${host}:8002/employees`
     }, {
         prefix: "/reviews",
-        target: "http://localhost:8003/reviews"
+        target: `${host}:8003/reviews`
     }]
-}).start(port).then(server => {
-    console.log(`API Gateway listening on ${port} port!`)
+}).start(port).then(_ => {
+    console.log(`${serviceName} listening on ${port} port!`)
 })

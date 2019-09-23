@@ -1,0 +1,6 @@
+[service]
+name = "Gateway"
+
+[http]
+host = "http://localhost"
+port = "8000"

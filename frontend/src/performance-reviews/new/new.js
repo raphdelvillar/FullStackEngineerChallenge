@@ -19,7 +19,7 @@ class New extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                api.Employee().Post(values, response => {
+                api.Review().Post(values, response => {
                     console.log(response);
                 })
             }

@@ -1,5 +1,3 @@
 ./fronted/node_modules
 ./backend/gateway/node_modules
 ./backend/authorization/node_modules
-./backend/employee/node_modules
-./backend/reviews/node_modules

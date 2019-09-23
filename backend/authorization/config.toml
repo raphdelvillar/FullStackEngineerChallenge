@@ -1,0 +1,11 @@
+[service]
+name = "Authorization"
+
+[http]
+port = "8001"
+
+[database]
+host = "localhost"
+user = "root"
+password = ""
+dbname = "paypay"
