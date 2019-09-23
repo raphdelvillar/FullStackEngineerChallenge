@@ -22,8 +22,17 @@ func (le *ListEmployee) Init() *command.Config {
 
 // Execute --
 func (le *ListEmployee) Execute(c echo.Context) *command.Response {
+	employees, err := Db.ListEmployees()
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  employees,
 	}
 }

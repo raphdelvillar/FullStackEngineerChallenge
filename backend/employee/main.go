@@ -3,15 +3,21 @@ package main
 import (
 	"employee/command"
 	"employee/service"
+	"employee/storage"
+)
+
+var (
+	Db = storage.NewMysqlStorage()
 )
 
 func main() {
-	le := &ListEmployee{}
-
 	svc := service.Handler{
 		Type: service.ECHO,
 		Commands: []command.Command{
-			le,
+			&ListEmployee{},
+			&FindEmployee{},
+			&CreateEmployee{},
+			&UpdateEmployee{},
 		},
 	}
 

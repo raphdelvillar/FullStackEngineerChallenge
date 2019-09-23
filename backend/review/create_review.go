@@ -38,6 +38,6 @@ func (cr *CreateReview) Execute(c echo.Context) *command.Response {
 
 	return &command.Response{
 		Error: nil,
-		Data:  mapdata,
+		Data:  nil,
 	}
 }

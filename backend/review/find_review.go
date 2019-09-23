@@ -24,8 +24,17 @@ func (fr *FindReview) Init() *command.Config {
 func (fr *FindReview) Execute(c echo.Context) *command.Response {
 	id := c.Param("id")
 
+	review, err := Db.FindReview(id)
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  review,
 	}
 }

@@ -24,8 +24,17 @@ func (fe *FindEmployee) Init() *command.Config {
 func (fe *FindEmployee) Execute(c echo.Context) *command.Response {
 	id := c.Param("id")
 
+	employee, err := Db.FindEmployee(id)
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  employee,
 	}
 }

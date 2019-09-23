@@ -22,8 +22,17 @@ func (lr *ListReview) Init() *command.Config {
 
 // Execute --
 func (lr *ListReview) Execute(c echo.Context) *command.Response {
+	reviews, err := Db.ListReviews()
+
+	if err != nil {
+		return &command.Response{
+			Error: err,
+			Data:  nil,
+		}
+	}
+
 	return &command.Response{
 		Error: nil,
-		Data:  nil,
+		Data:  reviews,
 	}
 }
