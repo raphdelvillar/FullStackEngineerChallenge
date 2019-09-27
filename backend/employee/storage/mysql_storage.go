@@ -22,11 +22,11 @@ type mysqlStorage struct {
 }
 
 func (s *mysqlStorage) Init() {
-	username := "root"
-	password := ""
-	host := "localhost"
-	port := "3306"
-	database := "employee"
+	username := serviceConfiguration.Database.Username
+	password := serviceConfiguration.Database.Password
+	host := serviceConfiguration.Database.Host
+	port := serviceConfiguration.Database.Port
+	database := serviceConfiguration.Database.Dbname
 
 	db, err := sql.Open("mysql",
 		fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",

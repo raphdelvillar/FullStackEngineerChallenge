@@ -42,5 +42,5 @@ func (h *Handler) ECHO() {
 		}
 
 	}
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", serviceConfiguration.Port)))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", serviceConfiguration.HTTP.Port)))
 }

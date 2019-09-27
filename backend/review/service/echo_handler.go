@@ -1,10 +1,10 @@
 package service
 
 import (
-	"review/enum"
 	"fmt"
 	"log"
 	"net/http"
+	"review/enum"
 
 	"github.com/labstack/echo"
 )
@@ -42,5 +42,5 @@ func (h *Handler) ECHO() {
 		}
 
 	}
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", serviceConfiguration.Port)))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", serviceConfiguration.HTTP.Port)))
 }

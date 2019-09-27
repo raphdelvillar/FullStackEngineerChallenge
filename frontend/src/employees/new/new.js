@@ -86,12 +86,12 @@ class New extends React.Component {
                         <Radio value={"Female"}>Female</Radio>
                     </Radio.Group>)}
                 </Form.Item>
-                <Form.Item label="DatePicker">
+                <Form.Item label="Join Date">
                     {getFieldDecorator("joindate", {
                         rules: [
                             {
                                 required: true,
-                                message: "Join Datei is required",
+                                message: "Join Date is required",
                             },
                         ],
                     })(<DatePicker style={{ marginTop: 5 }} />)}

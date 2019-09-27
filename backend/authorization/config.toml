@@ -1,11 +1,12 @@
 [service]
-name = "Authorization"
+name = "authorization"
 
 [http]
 port = "8001"
 
 [database]
-host = "localhost"
-user = "root"
+username = "root"
 password = ""
+host = "localhost"
+port = "3306"
 dbname = "paypay"

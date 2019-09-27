@@ -1,6 +1,13 @@
 package storage
 
-import "employee/domain"
+import (
+	"employee/domain"
+	"employee/configuration"
+)
+
+var (
+	serviceConfiguration = configuration.GetServiceConfiguration()
+)
 
 // Storage --
 type Storage interface {
