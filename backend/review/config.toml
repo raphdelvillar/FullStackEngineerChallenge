@@ -6,7 +6,7 @@ port = "8002"
 
 [database]
 username = "root"
-password = ""
+password = "subum9uM2EmUPzYzuzifOpD3RUb"
 host = "localhost"
 port = "3306"
 dbname = "paypay"

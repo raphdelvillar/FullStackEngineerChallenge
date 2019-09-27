@@ -16,11 +16,11 @@ export default class Appbar extends React.Component {
                         mode="horizontal"
                         style={{ lineHeight: '64px' }}
                     >
-                        <Menu.Item onClick={() => navigateToUrl("/employees")}>
-                            Employees
-                        </Menu.Item>
                         <Menu.Item onClick={() => navigateToUrl("/my-reviews")}>
                             My Reviews
+                        </Menu.Item>
+                        <Menu.Item onClick={() => navigateToUrl("/employees")}>
+                            Employees
                         </Menu.Item>
                         <Menu.Item onClick={() => navigateToUrl("/performance-reviews")}>
                             Performance Reviews

@@ -25,4 +25,6 @@ export function EmployeeSchema(node = "", method) {
                 return Mapper.mapNodeArray(ReviewSchema, iteratee, node, "reviews", method)
             }
     }
+
+    return employee;
 }

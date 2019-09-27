@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Table } from "antd";
+import { Table, Avatar } from "antd";
 
 import api from "../../data";
 
@@ -38,27 +38,34 @@ export default class TableView extends React.Component {
             : [];
         const columns = [
             {
-                title: 'Name',
-                dataIndex: 'name',
-                key: 'name',
+                title: "",
+                dataIndex: "",
+                render: data => {
+                    <Avatar size={64} icon="user" />
+                }
+            },
+            {
+                title: "Name",
+                dataIndex: "name",
+                key: "name",
                 sorter: (a, b) => a.name.length - b.name.length,
             },
             {
-                title: 'Designation',
-                dataIndex: 'designation',
-                key: 'designation',
+                title: "Designation",
+                dataIndex: "designation",
+                key: "designation",
                 sorter: (a, b) => a.designation.length - b.designation.length,
             },
             {
-                title: 'Gender',
-                dataIndex: 'gender',
-                key: 'gender',
+                title: "Gender",
+                dataIndex: "gender",
+                key: "gender",
                 sorter: (a, b) => a.gender.length - b.gender.length,
             },
             {
-                title: 'Join Date',
-                dataIndex: 'joinDate',
-                key: 'joinDate',
+                title: "Join Date",
+                dataIndex: "joinDate",
+                key: "joinDate",
                 sorter: (a, b) => a.joinDate.length - b.joinDate.length,
             },
         ];
