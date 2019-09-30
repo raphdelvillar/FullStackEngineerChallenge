@@ -18,7 +18,6 @@ class Action extends React.Component {
         <Button type="primary" onClick={() => this.newEmployee()}>
           Add Employee
         </Button>
-        <Button>Clear filters</Button>
       </div>
     );
   }

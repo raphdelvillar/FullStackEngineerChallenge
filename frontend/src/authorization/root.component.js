@@ -8,7 +8,7 @@ class Authorization extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        api.Authorization().Post(values, response => {
+        api.Authorization(null, "authorization/login").Post(values, response => {
           if (response.Error == null) {
             let token = response.Data.access_token;
             localStorage.setItem("access_token", token);
@@ -44,7 +44,7 @@ class Authorization extends React.Component {
             >
               <Form.Item>
                 {" "}
-                {getFieldDecorator("username", {
+                {getFieldDecorator("Username", {
                   rules: [
                     {
                       required: true,
@@ -67,7 +67,7 @@ class Authorization extends React.Component {
               </Form.Item>{" "}
               <Form.Item>
                 {" "}
-                {getFieldDecorator("password", {
+                {getFieldDecorator("Password", {
                   rules: [
                     {
                       required: true,

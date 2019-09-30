@@ -16,13 +16,16 @@ export class Employee {
 export class EmployeeListViewModel {
   constructor(url = "employee/") {
     this.url = url;
-    this.Employees = [];
+    this.Data = [];
   }
 
   Get(params, callback) {
     Api.Get(this.url, params, response => {
       if (callback) {
-        this.Employee = Mapper.mapList(Employee, EmployeeSchema, response.Data);
+        if (response.Data) {
+          this.Data = Mapper.mapList(Employee, EmployeeSchema, response.Data);
+        }
+        this.Error = response.Error;
         callback(this);
       }
     });
@@ -32,13 +35,17 @@ export class EmployeeListViewModel {
 export class EmployeeViewModel {
   constructor(url = "employee/") {
     this.url = url;
-    this.Employee = {};
+    this.Data = {};
+    this.Error = "";
   }
 
   Get(id, params, callback) {
     Api.Get(`${this.url}/${id}`, params, response => {
       if (callback) {
-        this.Employee = Mapper.mapOne(Employee, EmployeeSchema, response);
+        if (response.Data) {
+          this.Data = Mapper.mapOne(Employee, EmployeeSchema, response.Data);
+        }
+        this.Error = response.Error;
         callback(this);
       }
     });
@@ -48,7 +55,10 @@ export class EmployeeViewModel {
     data = Mapper.unmap(EmployeeSchema, data);
     Api.Post(this.url, data, response => {
       if (callback) {
-        this.Employee = Mapper.mapOne(Employee, EmployeeSchema, response.Data);
+        if (response.Data) {
+          this.Data = Mapper.mapOne(Employee, EmployeeSchema, response.Data);
+        }
+        this.Error = response.Error;
         callback(this);
       }
     });
@@ -58,7 +68,10 @@ export class EmployeeViewModel {
     data = Mapper.unmap(EmployeeSchema, data);
     Api.Patch(`${this.url}/${id}`, data, response => {
       if (callback) {
-        this.Employee = Mapper.mapOne(Employee, EmployeeSchema, response.Data);
+        if (response.Data) {
+          this.Data = Mapper.mapOne(Employee, EmployeeSchema, response.Data);
+        }
+        this.Error = response.Error;
         callback(this);
       }
     });
@@ -67,7 +80,9 @@ export class EmployeeViewModel {
   Delete(id, params, callback) {
     Api.Delete(`${this.url}/${id}`, params, response => {
       if (callback) {
-        callback(response);
+        this.Data = response.Data;
+        this.Error = response.Error;
+        callback(this);
       }
     });
   }

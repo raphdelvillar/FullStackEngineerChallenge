@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, Input, Radio, DatePicker, Button } from "antd";
+import { Form, Input, Radio, DatePicker, Button, notification } from "antd";
 
 import api from "../../data";
 
@@ -13,8 +13,21 @@ class New extends React.Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        values["JoinDate"] = values["JoinDate"].unix();
         api.Employee().Post(values, response => {
-          console.log(response);
+          if (response.Error != null) {
+            notification["error"]({
+              placement: "bottomRight",
+              message: "500",
+              description: "Internal Server Error"
+            });
+          } else {
+            notification["success"]({
+              placement: "bottomRight",
+              message: "Success!",
+              description: "Employee has been successfully created!"
+            });
+          }
         });
       }
     });
@@ -48,7 +61,7 @@ class New extends React.Component {
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="Name">
-          {getFieldDecorator("fullname", {
+          {getFieldDecorator("FullName", {
             rules: [
               {
                 required: true,
@@ -58,7 +71,7 @@ class New extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Form.Item label="Designation">
-          {getFieldDecorator("designation", {
+          {getFieldDecorator("Designation", {
             rules: [
               {
                 required: true,
@@ -68,7 +81,7 @@ class New extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Form.Item label="Email">
-          {getFieldDecorator("email", {
+          {getFieldDecorator("Email", {
             rules: [
               {
                 required: true,
@@ -78,7 +91,7 @@ class New extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Form.Item label="Gender">
-          {getFieldDecorator("gender", {
+          {getFieldDecorator("Gender", {
             rules: [
               {
                 required: true,
@@ -93,7 +106,7 @@ class New extends React.Component {
           )}
         </Form.Item>
         <Form.Item label="Join Date">
-          {getFieldDecorator("joindate", {
+          {getFieldDecorator("JoinDate", {
             rules: [
               {
                 required: true,

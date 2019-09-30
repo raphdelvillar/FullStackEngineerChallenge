@@ -1,9 +1,9 @@
 package service
 
 import (
-	"authorization/command"
-	"authorization/configuration"
 	"fmt"
+	"dashboard/command"
+	"dashboard/configuration"
 	"log"
 )
 

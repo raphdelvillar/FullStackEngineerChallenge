@@ -13,6 +13,7 @@ type Authorization struct {
 
 // Token --
 type Token struct {
+	UserID      int       `json:"user_id"`
 	EmployeeID  int       `json:"employee_id"`
 	DisplayName string    `json:"display_name"`
 	Username    string    `json:"username"`

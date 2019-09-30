@@ -29,7 +29,7 @@ func (l *Login) Init() *command.Config {
 	return &command.Config{
 		Name:   "Login",
 		Method: http.MethodPost,
-		Path:   "/",
+		Path:   "/login",
 	}
 }
 
@@ -41,8 +41,6 @@ func (l *Login) Execute(c echo.Context) *command.Response {
 			Data:  nil,
 		}
 	}
-
-	fmt.Println(l.Request.Authorization)
 
 	// authorization check for root --
 	if l.Request.Authorization.Username == serviceConfiguration.Admin.Username {
@@ -81,6 +79,8 @@ func (l *Login) Execute(c echo.Context) *command.Response {
 	}
 
 	ct := domain.Token{
+		UserID:      auth.ID,
+		EmployeeID:  auth.EmployeeID,
 		DisplayName: auth.DisplayName,
 		Username:    auth.Username,
 		Role:        enum.EMPLOYEE,
@@ -108,6 +108,7 @@ func (l *Login) GenerateToken(ct domain.Token) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
 
+	claims["user_id"] = ct.UserID
 	claims["display_name"] = ct.DisplayName
 	claims["username"] = ct.Username
 	claims["role"] = ct.Role

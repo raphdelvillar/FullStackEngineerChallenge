@@ -12,8 +12,8 @@ export default class Appbar extends React.Component {
   logout = () => {
     localStorage.clear();
     window.location.reload();
-  }
-  
+  };
+
   render() {
     return (
       <Layout className="layout">
@@ -32,12 +32,22 @@ export default class Appbar extends React.Component {
               style={{ float: "right" }}
               title={
                 <span className="submenu-title-wrapper">
-                  <Icon type="smile" theme="twoTone" twoToneColor="lightblue" style={{fontSize: 22, verticalAlign: "middle", marginRight: 20}} />
+                  <Icon
+                    type="smile"
+                    theme="twoTone"
+                    twoToneColor="lightblue"
+                    style={{
+                      fontSize: 22,
+                      verticalAlign: "middle",
+                      marginRight: 20
+                    }}
+                  />
                   {decodeToken().display_name}
+                  <Icon type="down" style={{ fontSize: 10, marginLeft: 10 }} />
                 </span>
               }
             >
-                <Menu.Item onClick={() => this.logout()}>Logout</Menu.Item>
+              <Menu.Item onClick={() => this.logout()}>Logout</Menu.Item>
             </SubMenu>
           </Menu>
         </Header>

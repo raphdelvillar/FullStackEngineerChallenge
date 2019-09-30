@@ -1,0 +1,12 @@
+[service]
+name = "Dashboard"
+
+[http]
+port = "8000"
+
+[database]
+username = "root"
+password = "subum9uM2EmUPzYzuzifOpD3RUb"
+host = "localhost"
+port = "3306"
+dbname = "paypay"
