@@ -16,7 +16,7 @@ class Authorization extends React.Component {
               let token = response.Data.access_token;
               if (token != undefined) {
                 localStorage.setItem("access_token", token);
-                navigateToUrl("/")
+                navigateToUrl("/dashboard");
                 window.location.reload();
               }
             }

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { navigateToUrl } from "single-spa";
 import { Form, Input, Radio, DatePicker, Button, notification } from "antd";
 
 import api from "../../data";
@@ -14,7 +14,7 @@ class New extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         values["JoinDate"] = values["JoinDate"].unix();
-        api.Employee().Post(values, response => {
+        api.Employee(null, "employee/create-employee").Post(values, response => {
           if (response.Error != null) {
             notification["error"]({
               placement: "bottomRight",
@@ -27,6 +27,7 @@ class New extends React.Component {
               message: "Success!",
               description: "Employee has been successfully created!"
             });
+            navigateToUrl("/employees");
           }
         });
       }

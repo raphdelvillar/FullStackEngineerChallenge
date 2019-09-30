@@ -43,8 +43,6 @@ func (s *mysqlStorage) Init() {
 	}
 
 	s.Db = db
-
-	defer db.Close()
 }
 
 func (s *mysqlStorage) ListReviews() ([]domain.Review, error) {
@@ -67,6 +65,8 @@ func (s *mysqlStorage) ListReviews() ([]domain.Review, error) {
 		reviews = append(reviews, review)
 	}
 
+	s.Db.Close()
+
 	return reviews, nil
 }
 
@@ -79,6 +79,8 @@ func (s *mysqlStorage) FindReview(id string) (domain.Review, error) {
 	if err != nil {
 		return domain.Review{}, err
 	}
+
+	s.Db.Close()
 
 	return review, nil
 }
@@ -93,6 +95,8 @@ func (s *mysqlStorage) CreateReview(review domain.Review) (domain.Review, error)
 
 	insertQuery.Exec(review.EmployeeID, review.Rating, review.Comment)
 
+	s.Db.Close()
+
 	return review, nil
 }
 
@@ -106,6 +110,8 @@ func (s *mysqlStorage) UpdateReview(id string, review domain.Review) (domain.Rev
 
 	updateQuery.Exec(review.EmployeeID, review.Rating, review.Comment)
 
+	s.Db.Close()
+
 	return review, nil
 }
 
@@ -118,6 +124,8 @@ func (s *mysqlStorage) DeleteReview(id string) error {
 	}
 
 	deleteQuery.Exec(id)
+
+	s.Db.Close()
 
 	return nil
 }

@@ -16,7 +16,7 @@ func (fe *FindEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Find Employee",
 		Method: http.MethodGet,
-		Path:   "/:id",
+		Path:   "/find-employee/:id",
 	}
 }
 

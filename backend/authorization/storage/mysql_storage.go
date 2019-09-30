@@ -44,7 +44,6 @@ func (s *mysqlStorage) Init() {
 
 	s.Db = db
 
-	defer db.Close()
 }
 
 func (s *mysqlStorage) IsAuthorized(username string) (domain.Authorization, error) {
@@ -56,6 +55,8 @@ func (s *mysqlStorage) IsAuthorized(username string) (domain.Authorization, erro
 	if err != nil {
 		return domain.Authorization{}, err
 	}
+
+	s.Db.Close()
 
 	return authorization, nil
 }

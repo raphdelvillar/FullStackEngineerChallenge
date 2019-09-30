@@ -11,7 +11,7 @@ import { decodeToken } from "../utils/token";
 export default class Appbar extends React.Component {
   logout = () => {
     localStorage.clear();
-    navigateToUrl("/")
+    navigateToUrl("/dashboard")
     window.location.reload();
   };
 
@@ -21,7 +21,7 @@ export default class Appbar extends React.Component {
         <Header>
           <div id="logo" />
           <Menu theme="dark" mode="horizontal" style={{ lineHeight: "64px" }}>
-            <Menu.Item onClick={() => navigateToUrl("/")}>Dashboard</Menu.Item>
+            <Menu.Item onClick={() => navigateToUrl("/dashboard")}>Dashboard</Menu.Item>
             <Menu.Item onClick={() => navigateToUrl("/employees")}>
               Employees
             </Menu.Item>
@@ -40,7 +40,7 @@ export default class Appbar extends React.Component {
                     style={{
                       fontSize: 22,
                       verticalAlign: "middle",
-                      marginRight: 20
+                      marginRight: 20,
                     }}
                   />
                   {decodeToken().display_name}

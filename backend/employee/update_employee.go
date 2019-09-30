@@ -23,7 +23,7 @@ func (ue *UpdateEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Update Employee",
 		Method: http.MethodPatch,
-		Path:   "/:id",
+		Path:   "/update-employee/:id",
 	}
 }
 

@@ -43,8 +43,6 @@ func (s *mysqlStorage) Init() {
 	}
 
 	s.Db = db
-
-	defer db.Close()
 }
 
 func (s *mysqlStorage) ListEmployees() ([]domain.Employee, error) {
@@ -57,15 +55,19 @@ func (s *mysqlStorage) ListEmployees() ([]domain.Employee, error) {
 		return nil, err
 	}
 
+	defer results.Close()
+
 	for results.Next() {
 		var employee domain.Employee
-		err = results.Scan(&employee)
+		err = results.Scan(&employee.ID, &employee.FullName, &employee.Designation, &employee.Email, &employee.Gender, &employee.JoinDate)
 		if err != nil {
 			return nil, err
 		}
 
 		employees = append(employees, employee)
 	}
+
+	s.Db.Close()
 
 	return employees, nil
 }
@@ -80,31 +82,37 @@ func (s *mysqlStorage) FindEmployee(id string) (domain.Employee, error) {
 		return domain.Employee{}, err
 	}
 
+	s.Db.Close()
+
 	return employee, nil
 }
 
 func (s *mysqlStorage) CreateEmployee(employee domain.Employee) (domain.Employee, error) {
 	s.Init()
-	insertQuery, err := s.Db.Prepare(fmt.Sprintf("INSERT INTO %s(full_name, designation, gender, join_date) VALUES (?, ?, ?, ?)", employeeTable))
+	insertQuery, err := s.Db.Prepare(fmt.Sprintf("INSERT INTO %s(full_name, designation, gender, join_date, email) VALUES (?, ?, ?, ?, ?)", employeeTable))
 
 	if err != nil {
 		return domain.Employee{}, err
 	}
 
-	insertQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate)
+	insertQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate, employee.Email)
+
+	s.Db.Close()
 
 	return employee, nil
 }
 
 func (s *mysqlStorage) UpdateEmployee(id string, employee domain.Employee) (domain.Employee, error) {
 	s.Init()
-	updateQuery, err := s.Db.Prepare(fmt.Sprintf("UPDATE %s SET full_name = ?, designation = ?, gender = ?, join_date = ?", employeeTable))
+	updateQuery, err := s.Db.Prepare(fmt.Sprintf("UPDATE %s SET full_name = ?, designation = ?, gender = ?, join_date = ?, email = ?", employeeTable))
 
 	if err != nil {
 		return domain.Employee{}, err
 	}
 
-	updateQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate)
+	updateQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate, employee.Email)
+
+	s.Db.Close()
 
 	return employee, nil
 }
@@ -118,6 +126,8 @@ func (s *mysqlStorage) DeleteEmployee(id string) error {
 	}
 
 	deleteQuery.Exec(id)
+
+	s.Db.Close()
 
 	return nil
 }

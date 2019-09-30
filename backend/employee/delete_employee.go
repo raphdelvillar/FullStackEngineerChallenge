@@ -16,7 +16,7 @@ func (de *DeleteEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Delete Employee",
 		Method: http.MethodDelete,
-		Path:   "/:id",
+		Path:   "/delete-employee/:id",
 	}
 }
 

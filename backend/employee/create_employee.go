@@ -23,13 +23,13 @@ func (ce *CreateEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Create Employee",
 		Method: http.MethodPost,
-		Path:   "/",
+		Path:   "/create-employee",
 	}
 }
 
 // Execute --
 func (ce *CreateEmployee) Execute(c echo.Context) *command.Response {
-	if err := c.Bind(&ce.Request); err != nil {
+	if err := c.Bind(&ce.Request.Employee); err != nil {
 		return &command.Response{
 			Error: err,
 			Data:  nil,

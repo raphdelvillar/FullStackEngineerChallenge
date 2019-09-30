@@ -1,6 +1,7 @@
 import React from "react";
-
-import { Table, Avatar } from "antd";
+import moment from "moment";
+import { navigateToUrl } from "single-spa";
+import { Table, Avatar, Button, Icon } from "antd";
 
 import api from "../../data";
 
@@ -19,12 +20,14 @@ export default class TableView extends React.Component {
   };
 
   getData = () => {
-    api.Employee("list").Get({}, response => {
-      this.setState({
-        data: response.Employees,
-        filteredData: response.Employees,
-        loading: false
-      });
+    api.Employee("list", "employee/list-employee").Get({}, response => {
+      if (response.Error == null) {
+        this.setState({
+          data: response.Data,
+          filteredData: response.Data,
+          loading: false
+        });
+      }
     });
   };
 
@@ -46,27 +49,37 @@ export default class TableView extends React.Component {
       },
       {
         title: "Name",
-        dataIndex: "name",
-        key: "name",
-        sorter: (a, b) => a.name.length - b.name.length
+        dataIndex: "FullName",
+        key: "FullName",
+        sorter: (a, b) => a.FullName.length - b.FullName.length
       },
       {
         title: "Designation",
-        dataIndex: "designation",
-        key: "designation",
-        sorter: (a, b) => a.designation.length - b.designation.length
+        dataIndex: "Designation",
+        key: "Designation",
+        sorter: (a, b) => a.Designation.length - b.Designation.length
       },
       {
         title: "Gender",
-        dataIndex: "gender",
-        key: "gender",
-        sorter: (a, b) => a.gender.length - b.gender.length
+        dataIndex: "Gender",
+        key: "Gender",
+        sorter: (a, b) => a.Gender.length - b.Gender.length
       },
       {
         title: "Join Date",
-        dataIndex: "joinDate",
-        key: "joinDate",
-        sorter: (a, b) => a.joinDate.length - b.joinDate.length
+        dataIndex: "JoinDate",
+        key: "JoinDate",
+        sorter: (a, b) => a.JoinDate.length - b.JoinDate.length,
+        render: data => {
+          return <span>{moment.unix(data).format("MM/DD/YYYY")}</span>;
+        }
+      },
+      {
+        title: "Action",
+        key: "action",
+        render: () => {
+          return <Button type="link" onClick={() => navigateToUrl("/employees/edit")} style={{fontSize: 15}}><Icon type="form" /> Update</Button>;
+        }
       }
     ];
     return (

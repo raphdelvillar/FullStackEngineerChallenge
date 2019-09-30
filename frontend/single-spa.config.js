@@ -41,7 +41,7 @@ registerApplication(
 registerApplication(
   "dashboard",
   () => import("./src/dashboard/dashboard.app.js"),
-  () => onCurrentRoute("/") && currentlyLoggedIn()
+  () => onCurrentRoute("/dashboard") && currentlyLoggedIn()
 );
 
 registerApplication(

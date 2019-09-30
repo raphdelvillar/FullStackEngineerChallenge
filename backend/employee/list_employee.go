@@ -16,7 +16,7 @@ func (le *ListEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "List Employee",
 		Method: http.MethodGet,
-		Path:   "/",
+		Path:   "/list-employee",
 	}
 }
 

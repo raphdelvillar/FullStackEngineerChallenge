@@ -48,7 +48,7 @@ class Edit extends React.Component {
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="Name">
-          {getFieldDecorator("fullname", {
+          {getFieldDecorator("FullName", {
             rules: [
               {
                 required: true,
@@ -58,7 +58,7 @@ class Edit extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Form.Item label="Designation">
-          {getFieldDecorator("designation", {
+          {getFieldDecorator("Designation", {
             rules: [
               {
                 required: true,
@@ -68,7 +68,7 @@ class Edit extends React.Component {
           })(<Input />)}
         </Form.Item>
         <Form.Item label="Gender">
-          {getFieldDecorator("gender", {
+          {getFieldDecorator("Gender", {
             rules: [
               {
                 required: true,
@@ -82,12 +82,12 @@ class Edit extends React.Component {
             </Radio.Group>
           )}
         </Form.Item>
-        <Form.Item label="DatePicker">
-          {getFieldDecorator("joindate", {
+        <Form.Item label="Join Date">
+          {getFieldDecorator("JoinDate", {
             rules: [
               {
                 required: true,
-                message: "Join Datei is required"
+                message: "Join Date is required"
               }
             ]
           })(<DatePicker style={{ marginTop: 5 }} />)}
