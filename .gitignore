@@ -1,3 +1,2 @@
 ./fronted/node_modules
-./backend/gateway/node_modules
-./backend/authorization/node_modules    
+./backend/api-gateway/node_modules
