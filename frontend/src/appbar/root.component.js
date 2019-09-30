@@ -11,6 +11,7 @@ import { decodeToken } from "../utils/token";
 export default class Appbar extends React.Component {
   logout = () => {
     localStorage.clear();
+    navigateToUrl("/")
     window.location.reload();
   };
 

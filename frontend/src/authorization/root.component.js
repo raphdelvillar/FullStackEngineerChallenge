@@ -1,5 +1,6 @@
 import React from "react";
-import { Layout, Card, Form, Icon, Input, Button } from "antd";
+import { navigateToUrl } from "single-spa";
+import { Layout, Card, Form, Icon, Input, Button, notification } from "antd";
 import api from "../data";
 import PaypayLogo from "./logo";
 
@@ -8,13 +9,24 @@ class Authorization extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        api.Authorization(null, "authorization/login").Post(values, response => {
-          if (response.Error == null) {
-            let token = response.Data.access_token;
-            localStorage.setItem("access_token", token);
-            window.location.reload();
-          }
-        });
+        api
+          .Authorization(null, "authorization/login")
+          .Post(values, response => {
+            if (response.Error == null) {
+              let token = response.Data.access_token;
+              if (token != undefined) {
+                localStorage.setItem("access_token", token);
+                navigateToUrl("/")
+                window.location.reload();
+              }
+            }
+
+            notification["error"]({
+              placement: "bottomRight",
+              message: "500",
+              description: "Internal Server Error"
+            });
+          });
       }
     });
   };

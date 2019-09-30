@@ -17,7 +17,6 @@ func main() {
 	svc := service.Handler{
 		Type: service.ECHO,
 		Commands: []command.Command{
-			// &ChangePassword{},
 			&Login{},
 		},
 	}

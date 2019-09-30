@@ -11,15 +11,6 @@ gateway({
 
   routes: [
     {
-      prefix: "/dashboard",
-      target: "http://localhost:8000",
-      middlewares: [
-        require("express-jwt")({
-          secret: config.http.secret
-        })
-      ]
-    },
-    {
       prefix: "/authorization",
       target: "http://localhost:8001"
     },
@@ -49,7 +40,16 @@ gateway({
           secret: config.http.secret
         })
       ]
-    }
+    },
+    {
+      prefix: "/dashboard",
+      target: "http://localhost:8005",
+      middlewares: [
+        require("express-jwt")({
+          secret: config.http.secret
+        })
+      ]
+    },
   ]
 })
   .start(PORT)

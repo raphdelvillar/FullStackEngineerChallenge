@@ -2,7 +2,7 @@
 name = "Dashboard"
 
 [http]
-port = "8000"
+port = "8005"
 
 [database]
 username = "root"
