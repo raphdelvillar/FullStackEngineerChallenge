@@ -15,8 +15,10 @@ var (
 
 func main() {
 	svc := service.Handler{
-		Type:     service.ECHO,
-		Commands: []command.Command{},
+		Type: service.ECHO,
+		Commands: []command.Command{
+			&Login{},
+		},
 	}
 
 	svc.Run()

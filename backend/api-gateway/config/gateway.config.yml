@@ -53,7 +53,7 @@ pipelines:
               methods: 'HEAD,PUT,PATCH,POST,DELETE'
       - proxy:
           - action:
-              serviceEndpoint: employeesvc 
+              serviceEndpoint: authsvc 
               changeOrigin: true
   employee:
     apiEndpoints:
