@@ -30,7 +30,7 @@ func (se *SendEmail) Init() *command.Config {
 
 // Execute --
 func (se *SendEmail) Execute(c echo.Context) *command.Response {
-	if err := c.Bind(&se.Request); err != nil {
+	if err := c.Bind(&se.Request.Mail); err != nil {
 		return &command.Response{
 			Error: err,
 			Data:  nil,
