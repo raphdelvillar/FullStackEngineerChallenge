@@ -3,7 +3,7 @@ package main
 import (
 	"employee/command"
 	"employee/domain"
-	"employee/enum"
+	"net/http"
 
 	"github.com/labstack/echo"
 )
@@ -22,7 +22,7 @@ type CreateEmployeeRequest struct {
 func (ce *CreateEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Create Employee",
-		Method: enum.POST,
+		Method: http.MethodPost,
 		Path:   "/",
 	}
 }

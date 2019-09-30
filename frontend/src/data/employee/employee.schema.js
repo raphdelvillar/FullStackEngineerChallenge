@@ -6,6 +6,7 @@ const Employee = {
     ID: "id",
     FullName: "full_name",
     Designation: "designation",
+    Email: "email",
     Gender: "gender",
     JoinDate: "join_date",
     Reviews: "reviews"

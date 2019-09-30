@@ -3,7 +3,7 @@ package main
 import (
 	"employee/command"
 	"employee/domain"
-	"employee/enum"
+	"net/http"
 
 	"github.com/labstack/echo"
 )
@@ -22,7 +22,7 @@ type UpdateEmployeeRequest struct {
 func (ue *UpdateEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Update Employee",
-		Method: enum.PATCH,
+		Method: http.MethodPatch,
 		Path:   "/:id",
 	}
 }

@@ -1,9 +1,9 @@
 package main
 
 import (
+	"net/http"
 	"review/command"
 	"review/domain"
-	"review/enum"
 
 	"github.com/labstack/echo"
 )
@@ -22,7 +22,7 @@ type UpdateReviewRequest struct {
 func (ur *UpdateReview) Init() *command.Config {
 	return &command.Config{
 		Name:   "Update Review",
-		Method: enum.PATCH,
+		Method: http.MethodPatch,
 		Path:   "/:id",
 	}
 }

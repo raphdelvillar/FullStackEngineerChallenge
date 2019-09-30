@@ -2,7 +2,7 @@
 name = "Review"
 
 [http]
-port = "8002"
+port = "8003"
 
 [database]
 username = "root"

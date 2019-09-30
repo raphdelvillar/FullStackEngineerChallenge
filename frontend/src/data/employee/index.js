@@ -7,6 +7,7 @@ export class Employee {
     ID;
     FullName;
     Designation;
+    Email;
     Gender;
     JoinDate;
     Reviews;

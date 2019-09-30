@@ -6,7 +6,11 @@ import { ReviewSchema } from "./review.schema";
 export class Review {
     ID;
     EmployeeID;
-    Comments;
+    ReviewedByID;
+    Performances;
+    Competencies;
+    Rating;
+    Comment;
 }
 
 export class ReviewListViewModel {

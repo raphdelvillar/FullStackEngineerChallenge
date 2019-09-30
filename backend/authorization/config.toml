@@ -10,3 +10,7 @@ password = ""
 host = "localhost"
 port = "3306"
 dbname = "paypay"
+
+[admin]
+username = "administrator"
+password = "12345"

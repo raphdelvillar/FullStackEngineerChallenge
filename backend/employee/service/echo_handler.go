@@ -1,7 +1,6 @@
 package service
 
 import (
-	"employee/enum"
 	"fmt"
 	"log"
 	"net/http"
@@ -15,23 +14,23 @@ func (h *Handler) ECHO() {
 	for _, command := range h.Commands {
 		initConfig := command.Init()
 		switch initConfig.Method {
-		case enum.GET:
+		case http.MethodGet:
 			e.GET(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
 				return c.JSON(http.StatusOK, cr)
 			})
 			break
-		case enum.POST:
+		case http.MethodPost:
 			e.POST(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
 				return c.JSON(http.StatusOK, cr)
 			})
-		case enum.PATCH:
+		case http.MethodPatch:
 			e.PATCH(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
 				return c.JSON(http.StatusOK, cr)
 			})
-		case enum.DELETE:
+		case http.MethodDelete:
 			e.DELETE(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
 				return c.JSON(http.StatusOK, cr)

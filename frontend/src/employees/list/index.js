@@ -5,13 +5,13 @@ import Search from "./search";
 import List from "./list";
 
 export default class Root extends React.Component {
-    render() {
-        return (
-            <div>
-                <Action />
-                <Search />
-                <List />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <Action />
+        <Search />
+        <List />
+      </div>
+    );
+  }
 }

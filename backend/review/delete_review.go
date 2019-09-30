@@ -1,8 +1,8 @@
 package main
 
 import (
+	"net/http"
 	"review/command"
-	"review/enum"
 
 	"github.com/labstack/echo"
 )
@@ -15,7 +15,7 @@ type DeleteReview struct {
 func (dr *DeleteReview) Init() *command.Config {
 	return &command.Config{
 		Name:   "Delete Review",
-		Method: enum.DELETE,
+		Method: http.MethodDelete,
 		Path:   "/:id",
 	}
 }

@@ -1,9 +1,9 @@
 package main
 
 import (
+	"net/http"
 	"review/command"
 	"review/domain"
-	"review/enum"
 
 	"github.com/labstack/echo"
 )
@@ -22,7 +22,7 @@ type CreateReviewRequest struct {
 func (cr *CreateReview) Init() *command.Config {
 	return &command.Config{
 		Name:   "Create Review",
-		Method: enum.POST,
+		Method: http.MethodPost,
 		Path:   "/",
 	}
 }

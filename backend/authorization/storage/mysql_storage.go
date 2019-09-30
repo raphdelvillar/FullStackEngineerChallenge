@@ -1,10 +1,15 @@
 package storage
 
 import (
+	"authorization/domain"
 	"database/sql"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
+)
+
+const (
+	authorizationTable = "authorization"
 )
 
 // NewMysqlStorage --
@@ -40,4 +45,17 @@ func (s *mysqlStorage) Init() {
 	s.Db = db
 
 	defer db.Close()
+}
+
+func (s *mysqlStorage) IsAuthorized(username string) (domain.Authorization, error) {
+	var authorization domain.Authorization
+
+	s.Init()
+	err := s.Db.QueryRow(fmt.Sprintf("SELECT * FROM %s WHERE username = ?", authorizationTable), username).Scan(&authorization)
+
+	if err != nil {
+		return domain.Authorization{}, err
+	}
+
+	return authorization, nil
 }

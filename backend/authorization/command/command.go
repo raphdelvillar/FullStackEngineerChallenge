@@ -15,7 +15,7 @@ type Command interface {
 // Config --
 type Config struct {
 	Name   string
-	Method enum.HTTPMethod
+	Method string
 	Path   string
 }
 

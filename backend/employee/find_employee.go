@@ -2,7 +2,7 @@ package main
 
 import (
 	"employee/command"
-	"employee/enum"
+	"net/http"
 
 	"github.com/labstack/echo"
 )
@@ -15,7 +15,7 @@ type FindEmployee struct {
 func (fe *FindEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Find Employee",
-		Method: enum.GET,
+		Method: http.MethodGet,
 		Path:   "/:id",
 	}
 }

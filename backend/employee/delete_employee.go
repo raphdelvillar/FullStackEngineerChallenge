@@ -2,7 +2,7 @@ package main
 
 import (
 	"employee/command"
-	"employee/enum"
+	"net/http"
 
 	"github.com/labstack/echo"
 )
@@ -15,7 +15,7 @@ type DeleteEmployee struct {
 func (de *DeleteEmployee) Init() *command.Config {
 	return &command.Config{
 		Name:   "Delete Employee",
-		Method: enum.DELETE,
+		Method: http.MethodDelete,
 		Path:   "/:id",
 	}
 }

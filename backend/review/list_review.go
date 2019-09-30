@@ -1,8 +1,8 @@
 package main
 
 import (
+	"net/http"
 	"review/command"
-	"review/enum"
 
 	"github.com/labstack/echo"
 )
@@ -15,7 +15,7 @@ type ListReview struct {
 func (lr *ListReview) Init() *command.Config {
 	return &command.Config{
 		Name:   "List Review",
-		Method: enum.GET,
+		Method: http.MethodGet,
 		Path:   "/",
 	}
 }

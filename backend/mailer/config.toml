@@ -1,0 +1,9 @@
+[service]
+name = "Mailer"
+
+[http]
+port = "8004"
+
+[email]
+sender = "...@gmail.com"
+password = ""

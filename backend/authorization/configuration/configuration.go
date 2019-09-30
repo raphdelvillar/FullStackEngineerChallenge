@@ -12,6 +12,7 @@ type ServiceConfiguration struct {
 	Service  service
 	HTTP     http
 	Database database
+	Admin    admin
 }
 
 type service struct {
@@ -28,6 +29,11 @@ type database struct {
 	Host     string
 	Port     string
 	Dbname   string
+}
+
+type admin struct {
+	Username string
+	Password string
 }
 
 var instance *ServiceConfiguration

@@ -3,6 +3,7 @@ import Mapper from "../api/mapper";
 const Review = {
     ID: "id",
     EmployeeID: "employee_id",
+    ReviewedByID: "reviewed_by_id",
     Performances: "performances",
     Competencies: "competencies",
     Rating: "rating",

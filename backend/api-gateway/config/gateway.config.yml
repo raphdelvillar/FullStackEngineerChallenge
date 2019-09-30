@@ -7,6 +7,9 @@ apiEndpoints:
   api:
     host: localhost
     paths: '/ip'
+  authorization:
+    host: localhost
+    paths: '/authorization'
   employee:
     host: localhost
     paths: '/employees'
@@ -16,6 +19,8 @@ apiEndpoints:
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
+  authsvc:
+    url: 'http://localhost:8001'
   employeesvc:
     url: 'http://localhost:8002'
   reviewsvc:
@@ -34,18 +39,26 @@ pipelines:
     apiEndpoints:
       - api
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - proxy:
           - action:
               serviceEndpoint: httpbin 
+              changeOrigin: true
+  authorization:
+    apiEndpoints:
+      - authorization
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'HEAD,PUT,PATCH,POST,DELETE'
+      - proxy:
+          - action:
+              serviceEndpoint: employeesvc 
               changeOrigin: true
   employee:
     apiEndpoints:
       - employee
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - cors:
           - action:
               origin: '*'
@@ -58,8 +71,6 @@ pipelines:
     apiEndpoints:
       - review
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
       - proxy:
           - action:
               serviceEndpoint: reviewsvc 
