@@ -3,7 +3,7 @@ import Axios from "./axios";
 class Api extends Axios {
   constructor(url) {
     super();
-    this.defaults.baseURL = "localhost:8999" + url;
+    this.defaults.baseURL = "http://localhost:8999/" + url + "/";
   }
 }
 

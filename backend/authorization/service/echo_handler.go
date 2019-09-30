@@ -17,22 +17,54 @@ func (h *Handler) ECHO() {
 		case http.MethodGet:
 			e.GET(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
+
+				if cr.Error != nil {
+					return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+						"Error": cr.Error.Error(),
+						"Data":  nil,
+					})
+				}
+
 				return c.JSON(http.StatusOK, cr)
 			})
 			break
 		case http.MethodPost:
 			e.POST(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
+
+				if cr.Error != nil {
+					return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+						"Error": cr.Error.Error(),
+						"Data":  nil,
+					})
+				}
+
 				return c.JSON(http.StatusOK, cr)
 			})
 		case http.MethodPatch:
 			e.PATCH(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
+
+				if cr.Error != nil {
+					return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+						"Error": cr.Error.Error(),
+						"Data":  nil,
+					})
+				}
+
 				return c.JSON(http.StatusOK, cr)
 			})
 		case http.MethodDelete:
 			e.DELETE(initConfig.Path, func(c echo.Context) error {
 				cr := command.Execute(c)
+
+				if cr.Error != nil {
+					return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+						"Error": cr.Error.Error(),
+						"Data":  nil,
+					})
+				}
+
 				return c.JSON(http.StatusOK, cr)
 			})
 		default:

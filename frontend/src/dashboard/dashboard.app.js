@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import singleSpaReact from "single-spa-react";
-import MyReviews from "./root.component.js";
+import Dashboard from "./root.component.js";
 
 function domElementGetter() {
-    return document.getElementById("my-reviews");
+    return document.getElementById("dashboard");
 }
 
 const reactLifecycles = singleSpaReact({
     React,
     ReactDOM,
-    rootComponent: MyReviews,
+    rootComponent: Dashboard,
     domElementGetter,
 })
 

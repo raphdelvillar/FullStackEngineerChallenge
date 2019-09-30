@@ -7,9 +7,9 @@ export default class Axios {
     instance.interceptors.request.use(
       function(config) {
         // handle before request
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("access_token")) {
           config.headers["Authorization"] = `Bearer ${
-            JSON.parse(localStorage.getItem("token")).access_token
+            localStorage.getItem("access_token")
           }`;
         }
         return config;

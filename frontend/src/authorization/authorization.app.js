@@ -4,24 +4,18 @@ import singleSpaReact from "single-spa-react";
 import Authorization from "./root.component.js";
 
 function domElementGetter() {
-    return document.getElementById("authorization");
+  return document.getElementById("authorization");
 }
 
 const reactLifecycles = singleSpaReact({
-    React,
-    ReactDOM,
-    rootComponent: Authorization,
-    domElementGetter,
-})
+  React,
+  ReactDOM,
+  rootComponent: Authorization,
+  domElementGetter
+});
 
-export const bootstrap = [
-    reactLifecycles.bootstrap,
-];
+export const bootstrap = [reactLifecycles.bootstrap];
 
-export const mount = [
-    reactLifecycles.mount,
-];
+export const mount = [reactLifecycles.mount];
 
-export const unmount = [
-    reactLifecycles.unmount,
-];
+export const unmount = [reactLifecycles.unmount];

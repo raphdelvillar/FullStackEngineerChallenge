@@ -16,11 +16,12 @@ type ServiceConfiguration struct {
 }
 
 type service struct {
-	name string
+	Name string
 }
 
 type http struct {
-	Port string
+	Port   string
+	Secret string
 }
 
 type database struct {

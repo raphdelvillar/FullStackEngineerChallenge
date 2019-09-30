@@ -1,15 +1,15 @@
 import Api from "../api/api";
 import Mapper from "../api/mapper";
 
+import { AuthorizationSchema } from "./authorization.schema";
+
 export class Authorization {
-    ID;
     Username;
     Password;
-    Status;
 }
 
 export class AuthorizationViewModel {
-    constructor(url = "") {
+    constructor(url = "authorization") {
         this.url = url;
         this.Authorization = {};
     }
@@ -18,12 +18,7 @@ export class AuthorizationViewModel {
         data = Mapper.unmap(AuthorizationSchema, data);
         Api.Post(this.url, data, response => {
             if (callback) {
-                this.Authorization = Mapper.mapOne(
-                    Authorization,
-                    AuthorizationSchema,
-                    response
-                );
-                callback(this);
+                callback(response);
             }
         })
     }

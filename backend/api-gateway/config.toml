@@ -1,0 +1,6 @@
+[service]
+name = "API Gateway"
+
+[http]
+port = "8999"
+secret = "paypay"
