@@ -69,7 +69,14 @@ export default class TableView extends React.Component {
         title: "Gender",
         dataIndex: "Gender",
         key: "Gender",
-        sorter: (a, b) => a.Gender.length - b.Gender.length
+        sorter: (a, b) => a.Gender.length - b.Gender.length,
+        render: data => {
+          if (data === "Male") {
+            return <span style={{ color: "blue" }}>{data}</span>;
+          } else {
+            return <span style={{ color: "red" }}>{data}</span>;
+          }
+        }
       },
       {
         title: "Join Date",
@@ -84,7 +91,15 @@ export default class TableView extends React.Component {
         title: "Action",
         key: "action",
         render: data => {
-          return <Button type="link" onClick={() => navigateToUrl(`/employees/edit/${data.ID}`)} style={{fontSize: 15}}><Icon type="form" /> Update</Button>;
+          return (
+            <Button
+              type="link"
+              onClick={() => navigateToUrl(`/employees/edit/${data.ID}`)}
+              style={{ fontSize: 15 }}
+            >
+              <Icon type="form" /> Update
+            </Button>
+          );
         }
       }
     ];

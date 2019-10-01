@@ -71,7 +71,14 @@ export default class TableView extends React.Component {
         title: "Gender",
         dataIndex: "Gender",
         key: "Gender",
-        sorter: (a, b) => a.Gender.length - b.Gender.length
+        sorter: (a, b) => a.Gender.length - b.Gender.length,
+        render: data => {
+          if (data === "Male") {
+            return <span style={{color: "blue"}}>{data}</span>
+          } else {
+            return <span style={{color: "red"}}>{data}</span>
+          }
+        }
       },
       {
         title: "Join Date",
