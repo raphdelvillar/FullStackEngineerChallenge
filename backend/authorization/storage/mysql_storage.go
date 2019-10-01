@@ -50,7 +50,7 @@ func (s *mysqlStorage) IsAuthorized(username string) (domain.Authorization, erro
 	var authorization domain.Authorization
 
 	s.Init()
-	err := s.Db.QueryRow(fmt.Sprintf("SELECT * FROM %s WHERE username = ?", authorizationTable), username).Scan(&authorization)
+	err := s.Db.QueryRow(fmt.Sprintf("SELECT * FROM %s WHERE username = ?", authorizationTable), username).Scan(&authorization.ID, &authorization.EmployeeID, &authorization.DisplayName, &authorization.Username, &authorization.Password)
 
 	if err != nil {
 		return domain.Authorization{}, err

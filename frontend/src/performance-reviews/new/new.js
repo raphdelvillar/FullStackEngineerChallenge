@@ -57,8 +57,8 @@ class New extends React.Component {
             ]
           })(<Input />)}
         </Form.Item>
-        <h2 style={{marginLeft: "30%"}}>Performance</h2>
-        <h2 style={{marginLeft: "30%"}}>Competency</h2>
+        <h3 style={{marginLeft: "30%"}}>Performance</h3>
+        <h3 style={{marginLeft: "30%"}}>Competency</h3>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Save

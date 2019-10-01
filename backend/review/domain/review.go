@@ -4,9 +4,9 @@ import "review/enum"
 
 // Review --
 type Review struct {
-	ID           int             `json:"id"`
-	EmployeeID   int             `json:"employee_id"`
-	ReviewedByID int             `json:"reviewed_by_id"`
+	ID           int64           `json:"id"`
+	EmployeeID   int64           `json:"employee_id"`
+	ReviewedByID int64           `json:"reviewed_by_id"`
 	Type         enum.ReviewType `json:"type"`
 	Performances []Performance   `json:"performances"`
 	Competencies []Competency    `json:"competencies"`
@@ -16,8 +16,8 @@ type Review struct {
 
 // Performance --
 type Performance struct {
-	ID          int     `json:"id"`
-	ReviewID    int     `json:"review_id"`
+	ID          int64   `json:"id"`
+	ReviewID    int64   `json:"review_id"`
 	Title       string  `json:"title"`
 	Description string  `json:"description"`
 	Rating      float32 `json:"rating"`
@@ -25,8 +25,8 @@ type Performance struct {
 
 // Competency --
 type Competency struct {
-	ID          int     `json:"id"`
-	ReviewID    int     `json:"review_id"`
+	ID          int64   `json:"id"`
+	ReviewID    int64   `json:"review_id"`
 	Title       string  `json:"title"`
 	Description string  `json:"description"`
 	Rating      float32 `json:"rating"`

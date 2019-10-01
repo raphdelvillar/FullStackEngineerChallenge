@@ -26,7 +26,7 @@ export default class PerformanceReviews extends React.Component {
         <Card>
           <Router basename={basename}>
             <Route path="/" exact component={List} />
-            <Route path="/new" exact component={New} />
+            <Route path="/new/:id" exact component={New} />
             <Route path="/edit" exact component={Edit} />
           </Router>
         </Card>

@@ -108,6 +108,7 @@ func (l *Login) GenerateToken(ct domain.Token) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := make(jwt.MapClaims)
 
+	claims["employee_id"] = ct.EmployeeID
 	claims["user_id"] = ct.UserID
 	claims["display_name"] = ct.DisplayName
 	claims["username"] = ct.Username

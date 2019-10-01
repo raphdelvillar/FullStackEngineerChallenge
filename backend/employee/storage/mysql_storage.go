@@ -9,7 +9,8 @@ import (
 )
 
 const (
-	employeeTable = "employees"
+	authorizationTable = "authorization"
+	employeeTable      = "employees"
 )
 
 // NewMysqlStorage --
@@ -95,11 +96,39 @@ func (s *mysqlStorage) CreateEmployee(employee domain.Employee) (domain.Employee
 		return domain.Employee{}, err
 	}
 
-	insertQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate, employee.Email)
+	result, err := insertQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate, employee.Email)
+
+	if err != nil {
+		return domain.Employee{}, err
+	}
+
+	id, _ := result.LastInsertId()
+	employee.ID = id
 
 	s.Db.Close()
 
+	err = s.CreateAccount(employee)
+
+	if err != nil {
+		return domain.Employee{}, err
+	}
+
 	return employee, nil
+}
+
+func (s *mysqlStorage) CreateAccount(employee domain.Employee) error {
+	s.Init()
+	insertQuery, err := s.Db.Prepare(fmt.Sprintf("INSERT INTO %s(employee_id, display_name, username, password) VALUES (?, ?, ?, ?)", authorizationTable))
+
+	if err != nil {
+		return err
+	}
+
+	insertQuery.Exec(employee.ID, employee.FullName, employee.Email, "12345")
+
+	s.Db.Close()
+
+	return nil
 }
 
 func (s *mysqlStorage) UpdateEmployee(id string, employee domain.Employee) (domain.Employee, error) {

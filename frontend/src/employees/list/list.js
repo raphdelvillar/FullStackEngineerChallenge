@@ -3,6 +3,8 @@ import moment from "moment";
 import { navigateToUrl } from "single-spa";
 import { Table, Avatar, Button, Icon } from "antd";
 
+import { decodeToken } from "../../utils/token";
+
 import api from "../../data";
 
 export default class TableView extends React.Component {
@@ -20,11 +22,12 @@ export default class TableView extends React.Component {
   };
 
   getData = () => {
+    console.log(decodeToken())
     api.Employee("list", "employee/list-employee").Get({}, response => {
       if (response.Error == null) {
         this.setState({
           data: response.Data,
-          filteredData: response.Data,
+          filteredData: response.Data.filter(data => data.ID !== decodeToken().employee_id),
           loading: false
         });
       }
@@ -91,15 +94,18 @@ export default class TableView extends React.Component {
         title: "Action",
         key: "action",
         render: data => {
-          return (
-            <Button
-              type="link"
-              onClick={() => navigateToUrl(`/employees/edit/${data.ID}`)}
-              style={{ fontSize: 15 }}
-            >
-              <Icon type="form" /> Update
-            </Button>
-          );
+          if (decodeToken().role === "Administrator") {
+            return (
+              <Button
+                type="link"
+                onClick={() => navigateToUrl(`/employees/edit/${data.ID}`)}
+                style={{ fontSize: 15 }}
+              >
+                <Icon type="form" /> Update
+              </Button>
+            );
+          }
+          return <span style={{ color: "red" }}>N/A</span>;
         }
       }
     ];

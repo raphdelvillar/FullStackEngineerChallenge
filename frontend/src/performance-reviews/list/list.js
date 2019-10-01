@@ -25,7 +25,7 @@ export default class TableView extends React.Component {
       if (response.Error == null) {
         this.setState({
           data: response.Data,
-          filteredData: response.Data,
+          filteredData: response.Data.filter(data => data.ID !== decodeToken().employee_id),
           loading: false
         });
       }
@@ -74,9 +74,9 @@ export default class TableView extends React.Component {
         sorter: (a, b) => a.Gender.length - b.Gender.length,
         render: data => {
           if (data === "Male") {
-            return <span style={{color: "blue"}}>{data}</span>
+            return <span style={{ color: "blue" }}>{data}</span>;
           } else {
-            return <span style={{color: "red"}}>{data}</span>
+            return <span style={{ color: "red" }}>{data}</span>;
           }
         }
       },
@@ -101,19 +101,22 @@ export default class TableView extends React.Component {
         render: data => {
           return (
             <span>
-              <Button
-                type="link"
-                onClick={() => navigateToUrl(``)}
-                style={{ fontSize: 15 }}
-              >
-                <Icon type="play-circle" /> Initiate Review
-              </Button>
+              {decodeToken().role === "Administrator" && (
+                <Button
+                  type="link"
+                  onClick={() =>
+                    navigateToUrl(`/performance-reviews/new/${data.ID}`)
+                  }
+                  style={{ fontSize: 15 }}
+                >
+                  <Icon type="play-circle" /> Initiate Review
+                </Button>
+              )}
               {decodeToken().role === "Employee" && (
                 <span>
-                  <Divider type="vertical" />
                   <Button
                     type="link"
-                    onClick={() => navigateToUrl(``)}
+                    onClick={() => navigateToUrl(`/performance-reviews/add`)}
                     style={{ fontSize: 15 }}
                   >
                     <Icon type="message" /> Add a Review

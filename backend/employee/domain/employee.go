@@ -2,7 +2,7 @@ package domain
 
 // Employee --
 type Employee struct {
-	ID          int    `json:"id"`
+	ID          int64  `json:"id"`
 	FullName    string `json:"full_name"`
 	Designation string `json:"designation"`
 	Email       string `json:"email"`

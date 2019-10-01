@@ -10,14 +10,14 @@ export default class Dashboard extends React.Component {
     return (
       <div>
         <Row gutter={10}>
-          <Col span={12}>
+          {/* <Col span={12}>
             <Card>
               <center>
                 <h4>Access Tracker</h4>
               </center>
               <AccessLineChart />
             </Card>
-          </Col>
+          </Col> */}
           <Col span={6}>
             <Card>
               <center>

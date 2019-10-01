@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
+import { decodeToken } from "../../utils/token";
+
 import { Button } from "antd";
 
 class Action extends React.Component {
@@ -15,9 +17,11 @@ class Action extends React.Component {
   render() {
     return (
       <div className="table-operations">
+        { decodeToken().role === "Administrator" &&
         <Button type="primary" onClick={() => this.newEmployee()}>
           Add Employee
         </Button>
+        }
       </div>
     );
   }

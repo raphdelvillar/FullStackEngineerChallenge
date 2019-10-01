@@ -4,8 +4,8 @@ import "authorization/enum"
 
 // Authorization --
 type Authorization struct {
-	ID          int    `json:"id"`
-	EmployeeID  int    `json:"employee_id"`
+	ID          int64  `json:"id"`
+	EmployeeID  int64  `json:"employee_id"`
 	DisplayName string `json:"display_name"`
 	Username    string `json:"username"`
 	Password    string `json:"password"`
@@ -13,8 +13,8 @@ type Authorization struct {
 
 // Token --
 type Token struct {
-	UserID      int       `json:"user_id"`
-	EmployeeID  int       `json:"employee_id"`
+	UserID      int64     `json:"user_id"`
+	EmployeeID  int64     `json:"employee_id"`
 	DisplayName string    `json:"display_name"`
 	Username    string    `json:"username"`
 	Role        enum.Role `json:"role"`
