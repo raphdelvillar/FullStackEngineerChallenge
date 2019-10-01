@@ -36,7 +36,7 @@ export default class Appbar extends React.Component {
                   <Icon
                     type="smile"
                     theme="twoTone"
-                    twoToneColor="lightblue"
+                    twoToneColor="blue"
                     style={{
                       fontSize: 22,
                       verticalAlign: "middle",

@@ -5,5 +5,5 @@ name = "Mailer"
 port = "8004"
 
 [email]
-sender = "...@gmail.com"
-password = ""
+sender = "paypayfsec@gmail.com"
+password = "paypay12345"
