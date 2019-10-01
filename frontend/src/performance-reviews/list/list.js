@@ -1,8 +1,10 @@
 import React from "react";
-
-import { Table } from "antd";
+import moment from "moment";
+import { navigateToUrl } from "single-spa";
+import { Table, Avatar, Button, Icon, Divider } from "antd";
 
 import api from "../../data";
+import { decodeToken } from "../../utils/token";
 
 export default class TableView extends React.Component {
   constructor(props) {
@@ -19,16 +21,19 @@ export default class TableView extends React.Component {
   };
 
   getData = () => {
-    api.Employee("list").Get({}, response => {
-      this.setState({
-        data: response.Employees,
-        filteredData: response.Employees,
-        loading: false
-      });
+    api.Employee("list", "employee/list-employee").Get({}, response => {
+      if (response.Error == null) {
+        this.setState({
+          data: response.Data,
+          filteredData: response.Data,
+          loading: false
+        });
+      }
     });
   };
 
   render() {
+    console.log(decodeToken());
     let { filteredData, loading } = this.state;
     let employees = filteredData
       ? filteredData.map(m => {
@@ -38,28 +43,79 @@ export default class TableView extends React.Component {
       : [];
     const columns = [
       {
+        title: "",
+        dataIndex: "",
+        render: data => {
+          <Avatar size={64} icon="user" />;
+        }
+      },
+      {
         title: "Name",
-        dataIndex: "name",
-        key: "name",
-        sorter: (a, b) => a.name.length - b.name.length
+        dataIndex: "FullName",
+        key: "FullName",
+        sorter: (a, b) => a.FullName.length - b.FullName.length
       },
       {
         title: "Designation",
-        dataIndex: "designation",
-        key: "designation",
-        sorter: (a, b) => a.designation.length - b.designation.length
+        dataIndex: "Designation",
+        key: "Designation",
+        sorter: (a, b) => a.Designation.length - b.Designation.length
+      },
+      {
+        title: "Email",
+        dataIndex: "Email",
+        key: "Email",
+        sorter: (a, b) => a.Email.length - b.Email.length
       },
       {
         title: "Gender",
-        dataIndex: "gender",
-        key: "gender",
-        sorter: (a, b) => a.gender.length - b.gender.length
+        dataIndex: "Gender",
+        key: "Gender",
+        sorter: (a, b) => a.Gender.length - b.Gender.length
       },
       {
         title: "Join Date",
-        dataIndex: "joinDate",
-        key: "joinDate",
-        sorter: (a, b) => a.joinDate.length - b.joinDate.length
+        dataIndex: "JoinDate",
+        key: "JoinDate",
+        sorter: (a, b) => a.JoinDate.length - b.JoinDate.length,
+        render: data => {
+          return <span>{moment.unix(data).format("MM/DD/YYYY")}</span>;
+        }
+      },
+      {
+        title: "Status",
+        dataIndex: "Status",
+        key: "Status",
+        sorter: (a, b) => a.Status.length - b.Status.length
+      },
+      {
+        title: "Action",
+        key: "action",
+        render: data => {
+          return (
+            <span>
+              <Button
+                type="link"
+                onClick={() => navigateToUrl(``)}
+                style={{ fontSize: 15 }}
+              >
+                <Icon type="play-circle" /> Initiate Review
+              </Button>
+              {decodeToken().role === "Employee" && (
+                <span>
+                  <Divider type="vertical" />
+                  <Button
+                    type="link"
+                    onClick={() => navigateToUrl(``)}
+                    style={{ fontSize: 15 }}
+                  >
+                    <Icon type="message" /> Add a Review
+                  </Button>
+                </span>
+              )}
+            </span>
+          );
+        }
       }
     ];
     return (

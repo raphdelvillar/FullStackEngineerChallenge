@@ -9,6 +9,9 @@ class Edit extends React.Component {
     super(props);
   }
 
+  componentDidMount = () => {
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -63,6 +66,16 @@ class Edit extends React.Component {
               {
                 required: true,
                 message: "Designation is required"
+              }
+            ]
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label="Email">
+          {getFieldDecorator("Email", {
+            rules: [
+              {
+                required: true,
+                message: "Email is required"
               }
             ]
           })(<Input />)}

@@ -1,8 +1,8 @@
 package storage
 
 import (
-	"dashboard/domain"
 	"dashboard/configuration"
+	"dashboard/domain"
 )
 
 var (
@@ -13,9 +13,5 @@ var (
 type Storage interface {
 	Init()
 
-	ListEmployees() ([]domain.Employee, error)
-	FindEmployee(id string) (domain.Employee, error)
-	CreateEmployee(employee domain.Employee) (domain.Employee, error)
-	UpdateEmployee(id string, employee domain.Employee) (domain.Employee, error)
-	DeleteEmployee(id string) error
+	GetMaleVsFemale() (domain.MaleVsFemale, error)
 }

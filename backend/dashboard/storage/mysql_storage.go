@@ -1,8 +1,8 @@
 package storage
 
 import (
-	"database/sql"
 	"dashboard/domain"
+	"database/sql"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -43,81 +43,19 @@ func (s *mysqlStorage) Init() {
 	}
 
 	s.Db = db
-
-	defer db.Close()
 }
 
-func (s *mysqlStorage) ListEmployees() ([]domain.Employee, error) {
-	var employees []domain.Employee
+func (s *mysqlStorage) GetMaleVsFemale() (domain.MaleVsFemale, error) {
+	var maleVsFemale domain.MaleVsFemale
 
 	s.Init()
-	results, err := s.Db.Query(fmt.Sprintf("SELECT * FROM %s", employeeTable))
+	err := s.Db.QueryRow(fmt.Sprintf("SELECT sum(case when gender = 'Female' then 1 else 0 end) AS Female, sum(case when gender = 'Male' then 1 else 0 end) AS Male FROM %s", employeeTable)).Scan(&maleVsFemale.Female, &maleVsFemale.Male)
 
 	if err != nil {
-		return nil, err
+		return domain.MaleVsFemale{}, err
 	}
 
-	for results.Next() {
-		var employee domain.Employee
-		err = results.Scan(&employee)
-		if err != nil {
-			return nil, err
-		}
+	s.Db.Close()
 
-		employees = append(employees, employee)
-	}
-
-	return employees, nil
-}
-
-func (s *mysqlStorage) FindEmployee(id string) (domain.Employee, error) {
-	var employee domain.Employee
-
-	s.Init()
-	err := s.Db.QueryRow(fmt.Sprintf("SELECT * FROM %s WHERE id = ?", employeeTable), id).Scan(&employee)
-
-	if err != nil {
-		return domain.Employee{}, err
-	}
-
-	return employee, nil
-}
-
-func (s *mysqlStorage) CreateEmployee(employee domain.Employee) (domain.Employee, error) {
-	s.Init()
-	insertQuery, err := s.Db.Prepare(fmt.Sprintf("INSERT INTO %s(full_name, designation, gender, join_date) VALUES (?, ?, ?, ?)", employeeTable))
-
-	if err != nil {
-		return domain.Employee{}, err
-	}
-
-	insertQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate)
-
-	return employee, nil
-}
-
-func (s *mysqlStorage) UpdateEmployee(id string, employee domain.Employee) (domain.Employee, error) {
-	s.Init()
-	updateQuery, err := s.Db.Prepare(fmt.Sprintf("UPDATE %s SET full_name = ?, designation = ?, gender = ?, join_date = ?", employeeTable))
-
-	if err != nil {
-		return domain.Employee{}, err
-	}
-
-	updateQuery.Exec(employee.FullName, employee.Designation, employee.Gender, employee.JoinDate)
-
-	return employee, nil
-}
-
-func (s *mysqlStorage) DeleteEmployee(id string) error {
-	s.Init()
-	deleteQuery, err := s.Db.Prepare(fmt.Sprintf("DELETE FROM %s WHERE id=?", employeeTable))
-
-	if err != nil {
-		return err
-	}
-
-	deleteQuery.Exec(id)
-
-	return nil
+	return maleVsFemale, nil
 }

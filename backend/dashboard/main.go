@@ -18,6 +18,7 @@ var (
 
 func main() {
 	e := echo.New()
+	addHandler(e, &MaleVsFemale{})
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", serviceConfiguration.HTTP.Port)))
 }
 

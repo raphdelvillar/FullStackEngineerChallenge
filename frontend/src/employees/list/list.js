@@ -60,6 +60,12 @@ export default class TableView extends React.Component {
         sorter: (a, b) => a.Designation.length - b.Designation.length
       },
       {
+        title: "Email",
+        dataIndex: "Email",
+        key: "Email",
+        sorter: (a, b) => a.Email.length - b.Email.length
+      },
+      {
         title: "Gender",
         dataIndex: "Gender",
         key: "Gender",
@@ -77,8 +83,8 @@ export default class TableView extends React.Component {
       {
         title: "Action",
         key: "action",
-        render: () => {
-          return <Button type="link" onClick={() => navigateToUrl("/employees/edit")} style={{fontSize: 15}}><Icon type="form" /> Update</Button>;
+        render: data => {
+          return <Button type="link" onClick={() => navigateToUrl(`/employees/edit/${data.ID}`)} style={{fontSize: 15}}><Icon type="form" /> Update</Button>;
         }
       }
     ];

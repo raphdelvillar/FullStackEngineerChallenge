@@ -27,7 +27,7 @@ export default class Employees extends React.Component {
           <Router basename={basename}>
             <Route path="/" exact component={List} />
             <Route path="/new" exact component={New} />
-            <Route path="/edit" exact component={Edit} />
+            <Route path="/edit/:id" exact component={Edit} />
           </Router>
         </Card>
       </div>
